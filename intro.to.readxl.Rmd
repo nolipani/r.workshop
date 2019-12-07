@@ -81,7 +81,7 @@ kelp_path <- here("r-workshop-data","kelp_counts_curated.xlsx")
   kelp_all_sites <-kelp_path %>% 
     excel_sheets() %>%
     set_names() %>%
-    map_df(read_excel,kelp_path)
+    purrr:: map_df(read_excel,path=kelp_path)
 
 ```
 We're going to write our "kelp_golb" object to a csv file 
