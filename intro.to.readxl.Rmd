@@ -9,7 +9,30 @@ output: html_document
 
 We are working with data in readxl and it's going to be gangster!
 
-```{r}
+We're going to use ppackages:
 
+-tidyverse
+-readxl
+-writexl
+-here
+
+```{r packages}
+library(tidyverse) 
+library(readxl)
+library(writexl)
+library(here)
+
+
+
+
+# install.packages("package_name") <!--comment hidden, this comment is hidden but not #install-->
+
+###Read in fish counts
 ```
 
+
+```{r}
+##### Read in the fish_counts_curated.csv
+
+fish.counts<- read.csv(here("r.workshop","fish_counts_curated.csv")  <!-- not working becasue of folder location-->
+```
