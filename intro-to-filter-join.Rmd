@@ -82,11 +82,60 @@ Some ways to do this:
 ```{r}
 urchin_abur_mohk <- invert_counts%>%
   filter(site %in% c("abur","mohk"), common_name == "purple urchin")
+
+
+##Example Pipe Order 
+##pipe_test<-fish_counts %>% 
+  ##select(common_name, total_count) %>% 
+  ##filter(year ==2016)
 ```
 
 
+Activity: create a subset from fish_counts, called low_gb_rw that only contains:
+
+-Observations for garibaldi and rock wrasse
+-where the total _count is less than 10 
 
 
+```{r}
+low_gb_rw <- fish_counts %>% 
+  filter(common_name %in% c("garibaldi","rock wrasse"),
+         total_count < 10)
+        
+```
+
+
+##Filter rows that Do Not Match Conditions 
+
+USE != (indicates "does NOT match")
+
+Try to create a subset from fish_counts that does NOT contain observations for Mohawk Reef ("mohk)
+
+```{r}
+fish_no_mohk <- fish_counts %>% 
+        filter(site != "mohk")
+```
+
+An example as part of a piped sequence 
+
+```{r}
+senorita_allyear <- fish_counts %>% 
+    filter(common_name == "senorita") %>%
+    group_by(site) %>%
+    summarize(count_all_years = sum(total_count))
+```
+
+
+## A couple ways pf joining data frames 
+
+- 'full_join()': keeps everything (safe join)
+- 'left_join()': : If we merging A and B, will only retain observations from B that have matches A 
+   
+
+```{r}   
+fish_2016_2017 <- fish_counts %>% 
+  filter(year==2016 | year==2017)
+```
 
 
 

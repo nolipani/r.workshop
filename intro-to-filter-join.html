@@ -385,14 +385,11 @@ summary {
 fish_counts &lt;- read_csv(here(&quot;r-workshop-data&quot;,&quot;fish_counts_curated.csv&quot;))</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
-##   `%&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% %&gt;% year` = col_character(),
+##   year = col_character(),
 ##   site = col_character(),
 ##   common_name = col_character(),
 ##   total_count = col_double()
 ## )</code></pre>
-<pre><code>## Warning: 1 parsing failure.
-## row col  expected    actual                                                                                          file
-##  46  -- 4 columns 1 columns &#39;C:/Users/SBF.SBFOUNDATION/Desktop/github/r.workshop/r-workshop-data/fish_counts_curated.csv&#39;</code></pre>
 <pre class="r"><code>kelp_counts_abur &lt;-  read_xlsx(here(&quot;r-workshop-data&quot;,&quot;kelp_counts_curated.xlsx&quot;))</code></pre>
 <ul>
 <li>select () function: keep, exclude or rearrange colums -filter() function: keeps or excludes ROWS (observations) based on whether or not they match variable conditions -Chapter 9</li>
@@ -419,7 +416,37 @@ fish_counts &lt;- read_csv(here(&quot;r-workshop-data&quot;,&quot;fish_counts_cu
 <p>Some ways to do this:</p>
 <p>-separate “AND” conditions within a single filter line by a coma</p>
 <pre class="r"><code>urchin_abur_mohk &lt;- invert_counts%&gt;%
-  filter(site %in% c(&quot;abur&quot;,&quot;mohk&quot;), common_name == &quot;purple urchin&quot;)</code></pre>
+  filter(site %in% c(&quot;abur&quot;,&quot;mohk&quot;), common_name == &quot;purple urchin&quot;)
+
+
+##Example Pipe Order 
+##pipe_test&lt;-fish_counts %&gt;% 
+  ##select(common_name, total_count) %&gt;% 
+  ##filter(year ==2016)</code></pre>
+<p>Activity: create a subset from fish_counts, called low_gb_rw that only contains:</p>
+<p>-Observations for garibaldi and rock wrasse -where the total _count is less than 10</p>
+<pre class="r"><code>low_gb_rw &lt;- fish_counts %&gt;% 
+  filter(common_name %in% c(&quot;garibaldi&quot;,&quot;rock wrasse&quot;),
+         total_count &lt; 10)</code></pre>
+<p>##Filter rows that Do Not Match Conditions</p>
+<p>USE != (indicates “does NOT match”)</p>
+<p>Try to create a subset from fish_counts that does NOT contain observations for Mohawk Reef (&quot;mohk)</p>
+<pre class="r"><code>fish_no_mohk &lt;- fish_counts %&gt;% 
+        filter(site != &quot;mohk&quot;)</code></pre>
+<p>An example as part of a piped sequence</p>
+<pre class="r"><code>senorita_allyear &lt;- fish_counts %&gt;% 
+    filter(common_name == &quot;senorita&quot;) %&gt;%
+    group_by(site) %&gt;%
+    summarize(count_all_years = sum(total_count))</code></pre>
+</div>
+<div id="a-couple-ways-pf-joining-data-frames" class="section level2">
+<h2>A couple ways pf joining data frames</h2>
+<ul>
+<li>‘full_join()’: keeps everything (safe join)</li>
+<li>‘left_join()’: : If we merging A and B, will only retain observations from B that have matches A</li>
+</ul>
+<pre class="r"><code>fish_2016_2017 &lt;- fish_counts %&gt;% 
+  filter(year==2016 | year==2017)</code></pre>
 </div>
 
 
