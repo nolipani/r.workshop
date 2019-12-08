@@ -70,7 +70,7 @@ ggplot(data = ci_np, aes (x= year, y = visitors))+
   
 ```
 I have awesome text here, and below is my amazing finalized graph: 
-```{r, echo = False}
+```{r, echo = FALSE}
 ggplot(data = ci_np, aes (x= year, y = visitors))+
   geom_point(color = "cyan4",
              pch = 11,
