@@ -20,7 +20,7 @@ library(skimr) #install.packages("skimr")
 Our data is about lobsters 
 
 ```{r}
-lobsters <- read_xlsx(here("r-workshop-data","lobsters.xlsx"))
+lobsters <- read_xlsx(here("r-workshop-data","lobsters2.xlsx"))
 ```
 
 
