@@ -104,10 +104,11 @@ siteyear_summary
 ##ggplot: geom_line 
 
 ```{r}
-ggplot(data = siteyear_summary, aes(x = year, y = median_size_mm, color = site))+ 
-  geom_line()
+ggplot (data = siteyear_summary, aes(x = year, y = median_size_mm, 
+    color = site))+ 
+    geom_line()
   
-  ggsave(here("figures/lobsters-line.png""))
+  ggsave(here("figures/lobsters-line.png"))
 ```
 
 
