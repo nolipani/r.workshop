@@ -1,0 +1,81 @@
+---
+title: "intro-to-ggplot2"
+author: "Neil Olipani"
+date: "12/8/2019"
+output: html_document
+---
+
+##Attach Packages 
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(here)
+```
+
+## Read in the data
+
+```{r}
+ca_np <-read_csv(here("r-workshop-data","ca_np.csv"))
+
+ci_np <- read_xlsx(here("r-workshop-data","ci_np.xlsx"))
+```
+
+## Make a graph 
+
+1. Tell R we're using 'ggplot'
+2. Tell R whata data we're using, and what variables we want to plot 
+3. What type of graph we're creating (geom)
+
+- ```{r, eval=Fasle}
+- ggplot(data = This , aes(x= This, y = This))+geom_This()
+-aes means aesthetically
+- ```
+
+
+Now let's create a graph of CI visitation:
+
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+    geom_line()
+```
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+    geom_area()
+```
+
+
+## Intro to customizing 'ggplot' graphs
+
+- color= (update point or line color)
+- fill = ( update the fill charactersitic of a element)
+- linetype = 
+- pch = (value)
+- size = 
+- alpha = 
+
+
+
+## geom_line makes the visuals different, aes changes the variable 
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+    geom_line(color = "cyan4", linetype = "dashed")
+```
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_point(color = "cyan4",
+             pch = 11,
+             size = 4,
+             alpa = 0.5)
+  
+```
+I have awesome text here, and below is my amazing finalized graph: 
+```{r, echo = False}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_point(color = "cyan4",
+             pch = 11,
+             size = 4,
+             alpa = 0.5)
+  
+```
+
