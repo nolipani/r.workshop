@@ -1,0 +1,93 @@
+---
+title: "filter/joins (VLOOKUP in Excel)"
+author: "Neil Olipani"
+date: "12/8/2019"
+output: html_document
+---
+
+## Attach Packages 
+## Use janitor ::clean_names() to automatically update all of your column names to lowercase_snake_case (this important)
+## Why is my pipe operator key board short cut not working? 
+
+```{r, include = FALSE}
+library(tidyverse)
+library(readxl)
+library(here)
+```
+
+Read in 3 files 
+
+-invert_counts_curated.xslx
+-fish_counts_curated.csv
+-kelp_counts_cutated.xlsx
+
+```{r}
+invert_counts <- read_xlsx(here("r-workshop-data","invert_counts_curated.xlsx"))
+  
+  
+fish_counts <- read_csv(here("r-workshop-data","fish_counts_curated.csv"))
+  
+  
+kelp_counts_abur <-  read_xlsx(here("r-workshop-data","kelp_counts_curated.xlsx"))
+```
+
+- select () function: keep, exclude or rearrange colums 
+-filter() function: keeps or excludes ROWS (observations) based on whether or not they match variable conditions
+-Chapter 9 
+
+
+## Filter to match rows based on a character string 
+
+Only keep observations from fish_counts where the common_name variable matches "garibaldi"
+## Use janitor ::clean_names() to automatically update all of your column names to lowercase_snake_case (this important)
+## == means exact match 
+```{r}
+fish_garibaldi <- fish_counts %>%
+  filter(common_name =="garibaldi")
+                
+```
+
+fish count over 50
+```{r}
+fish_over50 <- fish_counts %>%
+  filter(total_count >= 50)
+```
+
+
+```{r}
+mohawk_fish <- fish_counts %>%
+  filter(site=="mohk")
+```
+
+
+"or statement"
+```{r}
+fish_3sp <- fish_counts %>%
+    filter(common_name %in% c("garibaldi","blacksmith","black surfperch"))
+```
+
+## Filter to retun rows that match conditions for multiple variable (AND statements)
+
+I want to create a subset called urchin_abur_mohk that only keeps observations where:
+
+-site is "abur" or "mohk" AND 
+-species is "purple urchin"
+
+
+Some ways to do this:
+
+-separate "AND" conditions within a single filter line by a coma
+
+
+```{r}
+urchin_abur_mohk <- invert_counts%>%
+  filter(site %in% c("abur","mohk"), common_name == "purple urchin")
+```
+
+
+
+
+
+
+
+
