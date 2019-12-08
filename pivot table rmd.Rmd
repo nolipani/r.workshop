@@ -19,6 +19,8 @@ library(skimr) #install.packages("skimr")
 
 Our data is about lobsters 
 
+#changing lobster to lobster2 
+
 ```{r}
 lobsters <- read_xlsx(here("r-workshop-data","lobsters2.xlsx"))
 ```
@@ -105,10 +107,45 @@ siteyear_summary
 
 ```{r}
 ggplot (data = siteyear_summary, aes(x = year, y = median_size_mm, 
-    color = site))+ 
-    geom_line()
+    color = site))+geom_line()
   
-  ggsave(here("figures/lobsters-line.png"))
+  ggsave(here("figures","lobsters-line.png"))
 ```
+
+
+
+
+
+#mutate () add a new column 
+it will make a new variable 
+
+-add a new column that is the size in meres 
+- add a colum that is a repeated value 
+
+```{r}
+head (lobsters)
+
+lobsters %>% 
+    mutate(size_m = size_mm/1000,
+           millenia = 2000,
+           observer = "Allison Horst")
+```
+
+## select() function to subset 
+
+let's selet 
+-date 
+- site 
+-size_ml
+
+```{r}
+lobsters_selected <- lobsters %>%
+  mutate(size_m = size_mm/1000) %>% 
+  select(date, site, size_m)
+```
+
+
+
+
 
 
