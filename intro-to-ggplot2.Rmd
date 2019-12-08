@@ -174,3 +174,5 @@ ggplot(data = ca_np, aes (x= year, y = visitors, color = park_name))+
 ggsave ("np_graph.png",dpi = 180, width = 8, height = 7)
 
 ```
+
+##sync back to Github remote
