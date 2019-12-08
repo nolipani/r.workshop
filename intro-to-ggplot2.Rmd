@@ -79,3 +79,98 @@ ggplot(data = ci_np, aes (x= year, y = visitors))+
   
 ```
 
+
+## Customize elements based o variables values or outcomes, bigger the population the bigger the point, order of the characteristics
+
+
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_point(aes(size = visitors,
+                color = visitors),
+                pch = 11,
+                color = "cyan4",
+                alpha = 0.5)
+  
+```
+Activity: Create a colum plot of CINP visitation over time, where the FILL Color changes based on the number of visitors, and the outline color (color=) is magenta
+Reminder AES is a variable value, and outside it is a constant. 
+
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_col(aes(fill = visitors),
+              color = "magenta")
+  
+```
+
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_line(size = 3, color = "red") +
+  theme_dark()
+  
+```
+
+## Add/update lavels & titles 
+
+Using 'labs'
+
+
+
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_point(size = 1, 
+            color = "nay") +
+    theme_minimal()+
+  labs (x = "C.R.E.A.M",
+        y = "annual visitors",
+        title = "Wu Tang",
+        subtilte = "American Saga")
+  
+```
+
+## Combine compatible geoms 
+
+
+Example: Add a point plot on top of a line plot: 
+
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_line( fill= " magenta")+
+  geom_point (color = "magenta", 
+              aes(size = year))
+  
+```
+```{r}
+ggplot(data = ci_np, aes (x= year, y = visitors))+
+  geom_line(fill = " magenta")+
+  geom_col (color = "magenta", 
+              aes(size = year))
+  
+```
+## Creat a line graph with multiple series 
+
+```{r}
+ggplot(data = ca_np, aes (x= year, y = visitors, color = park_name))+
+  geom_line()
+
+```
+
+
+
+## Faceting ggplot graphs 
+
+-Each sereis (group) gets its own plot panel
+```{r}
+ggplot(data = ca_np, aes (x= year, y = visitors, color = park_name))+
+  geom_line(show.legend = FALSE) +
+  theme_minimal()+
+  facet_wrap (~ park_name)
+
+```
+
+
+## Use ggsave to export a plot 
+
+```{r}
+ggsave ("np_graph.png",dpi = 180, width = 8, height = 7)
+
+```
